@@ -8,11 +8,8 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { login, loginWithGoogle, loading } = useAuth();
   const [form] = Form.useForm();
-  const [loggingIn, setLoggingIn] = useState(false);
 
   const onFinish = async (values: { email: string; password: string }) => {
-    setLoggingIn(true);
-    
     try {
       const success = await login(values.email, values.password);
       
@@ -24,8 +21,6 @@ const LoginPage = () => {
       }
     } catch (error) {
       message.error('Login failed. Please try again.');
-    } finally {
-      setLoggingIn(false);
     }
   };
 
@@ -96,7 +91,7 @@ const LoginPage = () => {
                 htmlType="submit"
                 size="large"
                 block
-                loading={loggingIn}
+                loading={loading}
                 className="bg-primary-500 hover:bg-primary-600"
               >
                 Sign In
@@ -129,12 +124,6 @@ const LoginPage = () => {
             </Link>
           </div>
         </Card>
-
-        <div className="mt-6 text-center text-gray-500 text-sm">
-          <p>Demo logins:</p>
-          <p>Admin: admin@tekoinnovation.com / password123</p>
-          <p>User: user@tekoinnovation.com / password123</p>
-        </div>
       </div>
     </div>
   );

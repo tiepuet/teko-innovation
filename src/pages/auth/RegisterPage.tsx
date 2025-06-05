@@ -8,7 +8,6 @@ const RegisterPage = () => {
   const navigate = useNavigate();
   const { register, loginWithGoogle, loading } = useAuth();
   const [form] = Form.useForm();
-  const [registering, setRegistering] = useState(false);
 
   const onFinish = async (values: { email: string; password: string; fullName: string }) => {
     if (values.password !== values.confirmPassword) {
@@ -16,8 +15,6 @@ const RegisterPage = () => {
       return;
     }
 
-    setRegistering(true);
-    
     try {
       const success = await register(values.email, values.password, values.fullName);
       
@@ -29,8 +26,6 @@ const RegisterPage = () => {
       }
     } catch (error) {
       message.error('Registration failed. Please try again.');
-    } finally {
-      setRegistering(false);
     }
   };
 
@@ -133,7 +128,7 @@ const RegisterPage = () => {
                 htmlType="submit"
                 size="large"
                 block
-                loading={registering}
+                loading={loading}
                 className="bg-primary-500 hover:bg-primary-600"
               >
                 Register
