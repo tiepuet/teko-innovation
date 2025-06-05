@@ -15,7 +15,7 @@ const LoginPage = () => {
       
       if (success) {
         message.success('Login successful!');
-        navigate('/events');
+        navigate('/');
       } else {
         message.error('Invalid email or password');
       }
